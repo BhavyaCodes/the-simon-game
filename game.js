@@ -41,16 +41,26 @@ $(".btn").click(function(event){
 
 
 
-var gamePattern = [];
+    var gameState = false;
 
-buttonColours = ["blue", "green", "red", "yellow"];
+    var gamePattern = [];
 
+    buttonColours = ["blue", "green", "red", "yellow"];
 
-function nextSquence(){
-  var randomNumber = Math.floor(Math.random()*4);
-  randomChosenColour = buttons[randomNumber].colour;
-  //console.log(randomChosenColour);
-  gamePattern.push(randomChosenColour);
-  buttons[randomNumber].handler();
-  console.log(gamePattern);
-}
+    var level = 0;
+
+    function nextSquence(){
+      var randomNumber = Math.floor(Math.random()*4);
+      randomChosenColour = buttons[randomNumber].colour;
+      //console.log(randomChosenColour);
+      gamePattern.push(randomChosenColour);
+      buttons[randomNumber].handler();
+      //console.log(gamePattern);
+      $("h1").text("Level "+level);
+    }
+    $(document).keypress(function(){
+      if (gameState === false){
+        nextSquence();
+      }
+      gameState = true;
+    });
